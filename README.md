@@ -1,5 +1,18 @@
 # GraphicsEngine
-A C++ OpenGL engine.
+A simple C++ OpenGL engine written from scratch.
+* Written without threading, uses main-loop to update processes.
+* Supports MD2 models.
+* Camera
+* Polygon subdivision
+* Linear interpolation
+
+## Controls
+* [ESC] Exits
+* [Left], [Right] rotates camera
+* w,a,s,d translates camera
+* z toggles polygon subdivision
+* x toggles linear interpolation
+* c toggles shading
 
 ## Requirements
 SDL2, SDL2_mixer, SDL2_image, OpenGL2 (gl and glu).
