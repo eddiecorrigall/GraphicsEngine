@@ -2,7 +2,7 @@
 A simple C++ OpenGL engine written from scratch.
 Written without threading, uses main-loop to update processes.
 
-Features:
+## Features
 * Camera
 * MD2 models
 * Motion blur
