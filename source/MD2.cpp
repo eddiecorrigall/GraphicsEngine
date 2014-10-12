@@ -2,17 +2,17 @@
 #include "Process.hpp"
 #include "Misc.hpp"
 
+#include <GL/gl.h>
+
+#include <glm/gtx/transform.hpp>
+#include <glm/gtc/type_ptr.hpp>
+
 #include <iostream>
 #include <fstream>
 #include <string>
 #include <vector>
 
 #include <cassert>
-
-#include <GL/gl.h>
-
-#include <glm/gtx/transform.hpp>
-#include <glm/gtc/type_ptr.hpp>
 
 using namespace std;
 
@@ -30,7 +30,7 @@ using namespace std;
 
 void MD2Model::LoadModel(const string& md2_path) {
     
-    ifstream md2_file(md2_path.c_str(), fstream::in | fstream::binary);
+    fstream md2_file(md2_path.c_str(), fstream::in | fstream::binary);
 
     if (md2_file.good() == false) {
         cerr << "ERROR: MD2 file failed to load!" << endl;
@@ -330,7 +330,7 @@ void MD2Model::Render(Animation* object) {
      * - Increased over time
      */
     
-    //cerr << "Frame info " << current_frame_index << " " << next_frame_index << endl;
+    //cout << "Frame info " << current_frame_index << " " << next_frame_index << endl;
     
     assert(current_frame_index < header.numberOfFrames);
     assert(next_frame_index < header.numberOfFrames);
@@ -452,18 +452,18 @@ void MD2Model::Render(Animation* object) {
              */
             
             // Decompress current vertex...
-            u[X] = (current_frame.scale[0] * current_vertex.components[0] + current_frame.translate[0]);
-            u[Y] = (current_frame.scale[2] * current_vertex.components[2] + current_frame.translate[2]);
-            u[Z] = (current_frame.scale[1] * current_vertex.components[1] + current_frame.translate[1]);
+            u[X] = (current_frame.scale[X] * current_vertex.components[X] + current_frame.translate[X]);
+            u[Y] = (current_frame.scale[Z] * current_vertex.components[Z] + current_frame.translate[Z]);
+            u[Z] = (current_frame.scale[Y] * current_vertex.components[Y] + current_frame.translate[Y]);
             
             if (gfx->IsInterpolationEnabled()) {
                 
                 // Linear Interpolation...
 
                 // Decompress next vertex...
-                v[X] = (next_frame.scale[0] * next_vertex.components[0] + next_frame.translate[0]);
-                v[Y] = (next_frame.scale[2] * next_vertex.components[2] + next_frame.translate[2]);
-                v[Z] = (next_frame.scale[1] * next_vertex.components[1] + next_frame.translate[1]);
+                v[X] = (next_frame.scale[X] * next_vertex.components[X] + next_frame.translate[X]);
+                v[Y] = (next_frame.scale[Z] * next_vertex.components[Z] + next_frame.translate[Z]);
+                v[Z] = (next_frame.scale[Y] * next_vertex.components[Y] + next_frame.translate[Y]);
                 
                 // Linearly interpolate over u and v...
                 u += frame_interp * (v - u);
@@ -569,13 +569,6 @@ void MD2Model::Render(Animation* object) {
         
         // ##### Subdivision ##### //
         
-        /* Goal: Increase polygon count
-         * - Better cel shading (DONE)
-         * - Increase model quality & detail (TODO)
-         *      Note: Need a better subdivision scheme
-         *      ie. subdivide via squares (two triangles)
-         */
-        
         int subdivide_depth = gfx->IsSubdivisionEnabled() ? 2 : 0;
         
         Subdivide2D( // Subdivide texture coordinates
@@ -616,7 +609,7 @@ void MD2Model::Render(Animation* object) {
     }
     
     // ##### RENDERING ##### //
-    // Faster drawing using arrays
+    // Faster drawing using buffered arrays
     
     glPushAttrib(GL_ALL_ATTRIB_BITS);
     

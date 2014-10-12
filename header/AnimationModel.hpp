@@ -2,9 +2,12 @@
 #define	__ANIMATIONMODEL_HPP__
 
 #include <string>
+#include <iostream>
 #include <fstream>
 
 #include <cassert>
+
+#include "Process.hpp"
 
 using namespace std;
 
@@ -42,11 +45,12 @@ class AnimationInfo {
         
         AnimationInfo(const string& path) {
             
+            // TODO: Could be written better...
+            
             cout << "Load ACT file..." << endl;
+            cout << "Path " << path << endl;
 
-            cout << "\tPath " << path << endl;
-
-            ifstream file(path.c_str(), fstream::in);
+            fstream file(path.c_str(), fstream::in);
 
             if (file.good() == false) {
                 cerr << "ERROR: File failed to load!" << endl;
@@ -56,16 +60,22 @@ class AnimationInfo {
             getline(file, model_path);
             getline(file, texture_path);
             
+            cout << "Model Path " << model_path << endl;
+            cout << "Texture Path " << texture_path << endl;
+            
             ActionInfo action_info;
             
             while(true) {
                 
                 string action_type_string;
                 
-                if ((file >> action_type_string) == NULL) break;
-                if ((file >> action_info.loop) == NULL) break;
-                if ((file >> action_info.frameIndexOffset) == NULL) break;
-                if ((file >> action_info.numberOfFrames) == NULL) break;
+                if ((file   >> action_type_string
+                            >> action_info.loop
+                            >> action_info.frameIndexOffset
+                            >> action_info.numberOfFrames) == NULL) {
+                    
+                    break;
+                }
                 
                 action_info.type = StringToActionType(action_type_string);
                 

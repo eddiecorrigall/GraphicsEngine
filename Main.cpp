@@ -1,19 +1,10 @@
 #include "Process.hpp"
+
 #include "Video.hpp"
 #include "Audio.hpp"
 #include "Input.hpp"
 
 #include "MD2.hpp"
-
-#include <vector>
-#include <iostream>
-
-/* TODO - Debug
- * - Why has my animation resource not running?
- * - Why does the engine stop, when stop is ever called?
- */
-
-using namespace std;
 
 int main(int argc, char** argv) {
     

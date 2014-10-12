@@ -19,14 +19,9 @@
 
 #include <GL/gl.h>
 #include <GL/glu.h>
-//#include <GL/glut.h>
 
 #include <glm/gtx/transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
-
-//#include <glm/gtx/string_cast.hpp>
-//#include <glm/gtx/rotate_vector.hpp>
-//#include <glm/gtc/matrix_access.hpp>
 
 Colour GetPixel(void* image, const unsigned int& x, const unsigned int& y) {
     
@@ -273,7 +268,7 @@ void* toon_filter(
     );
     
     // Sort...
-    //sort(image_palette.begin(), image_palette.end(), colour_comparator);
+    
     sort(image_palette.begin(), image_palette.end());
     
     // Select a palette: a subset of colours...
@@ -287,7 +282,6 @@ void* toon_filter(
     
     for (int i = 0; i < TOON_PALETTE_SIZE; i++) { // Debug only...
         toon_palette[i] = image_palette[i * palette_colour_distance];
-        //colour_print(toon_palette[i]);
     }
     
     // Map new colour palette to image palette...
@@ -321,7 +315,7 @@ void* toon_filter(
 
 TextureFilter TextureFilter_Toon = &toon_filter;
 
-Video::Video(const std::string& name) : System(name) {
+Video::Video(const string& name) : System(name) {
     
     enable_interpolation = true;
     enable_subdivision = true;
@@ -343,8 +337,8 @@ Video::Video(const std::string& name) : System(name) {
     // ##### SDL2...
     
     if (SDL_Init(SDL_INIT_VIDEO) != 0) {
-        std::cerr << "ERROR: Failed to initialize SDL VIDEO!" << std::endl;
-        std::cerr << SDL_GetError() << std::endl;
+        cerr << "ERROR: Failed to initialize SDL VIDEO!" << endl;
+        cerr << SDL_GetError() << endl;
         engine.Stop();
         return;
     }
@@ -372,8 +366,8 @@ Video::Video(const std::string& name) : System(name) {
         SDL_WINDOW_OPENGL | SDL_WINDOW_RESIZABLE);
     
     if (window == NULL) {
-        std::cerr << "ERROR: Could not create window!" << std::endl;
-        std::cerr << SDL_GetError() << std::endl;
+        cerr << "ERROR: Could not create window!" << endl;
+        cerr << SDL_GetError() << endl;
         engine.Stop();
         return;
     }
@@ -383,8 +377,8 @@ Video::Video(const std::string& name) : System(name) {
     context = (void*)SDL_GL_CreateContext((SDL_Window*)window);
     
     if (context == NULL) {
-        std::cerr << "ERROR: Could not create context!" << std::endl;
-        std::cerr << SDL_GetError() << std::endl;
+        cerr << "ERROR: Could not create context!" << endl;
+        cerr << SDL_GetError() << endl;
         engine.Stop();
         return;
     }
@@ -449,7 +443,7 @@ Video::Video(const std::string& name) : System(name) {
 
 Video::~Video() {
     
-    std::cout << "Video::Destroy" << std::endl;
+    cout << "Video::Destroy" << endl;
     
     if (context != NULL) {
         SDL_GL_DeleteContext((SDL_GLContext)context);
@@ -628,7 +622,7 @@ unsigned int Video::LoadTexture(
 
     cout << "Loading Texture..." << endl;
 
-    cout << "\tPath: " << path << endl;
+    cout << "Path: " << path << endl;
 
     SDL_Surface* image = IMG_Load(path.c_str());
 
@@ -732,10 +726,10 @@ unsigned int Video::LoadTexture(
 
     // Success!
 
-    cout << "\tWidth:\t"    << width << "px" << endl;
-    cout << "\tHeight:\t"   << height << "px" << endl;
-    cout << "\tBPP:\t"      << (int)bytes_per_pixel << endl;
-    cout << "\tID:\t"       << texture_id << endl;
+    cout << "Width:"    << width << "px" << endl;
+    cout << "Height "   << height << "px" << endl;
+    cout << "BPP "      << (int)bytes_per_pixel << endl;
+    cout << "ID "       << texture_id << endl;
 
     return texture_id;
 }

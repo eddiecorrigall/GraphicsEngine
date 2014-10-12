@@ -12,9 +12,6 @@ using namespace std;
 
 class Animation : public Drawable {
 
-    // Abstract class:
-    // Empty virtual method; void Update(unsigned int)
-
     private:
 
         AnimationModel* model;
@@ -93,8 +90,9 @@ class Animation : public Drawable {
             return frame;
         }
         
-        // Note: frame_offset can be both negative and positive
         unsigned int GetFrameIndex(const int& frame_offset) {
+            
+            // Note: frame_offset can be both negative and positive
 
             const ActionInfo action_info = model->GetActionInfo(GetAction());
             

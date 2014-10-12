@@ -7,7 +7,6 @@
 #include <glm/glm.hpp>
 
 #include <string>
-#include <iostream>
 
 using namespace std;
 
@@ -18,6 +17,11 @@ using namespace std;
 #define VIDEO_FAR       (1000.0f)
 #define VIDEO_WIDTH     (800)
 #define VIDEO_HEIGHT    (600)
+
+#define X (0)
+#define Y (1)
+#define Z (2)
+#define W (3)
 
 typedef void* (*TextureFilter)(
     void* image,
@@ -104,12 +108,12 @@ class Video : public System {
         glm::vec3 GetViewZAxis();
         
         void UpdateViewPitch(const float& delta_pitch);
-        
         void UpdateViewMove(const float& delta_x, const float& delta_y, const float& delta_z);
         
         bool IsTexture(const unsigned int& texture_id);
         
-        // Return 0 on failure, otherwise return the texture_id
+        // Return 0 on failure,
+        // Otherwise return a texture_id
         unsigned int LoadTexture(
             string const& path,
             unsigned int& width,

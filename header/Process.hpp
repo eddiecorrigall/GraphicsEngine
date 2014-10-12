@@ -2,7 +2,6 @@
 #define __PROCESS_HPP__
 
 #include <typeinfo>
-#include <ostream>
 #include <string>
 #include <vector>
 #include <map>
@@ -22,9 +21,6 @@ extern bool operator== (const System& a, const System& b);
 typedef map<const type_info*, System*> SystemMap;
 typedef vector<Resource*> ResourceList;
 
-#include <iostream>
-using namespace std;
-
 class Process {
     
     friend class ProcessManager;
@@ -43,7 +39,7 @@ class Process {
         
         Process(const string& name) : name(name) {}
         
-        string Name() { return name; }
+        virtual string Name() { return name; }
 };
 
 class System : public Process {
@@ -84,12 +80,6 @@ class Resource : public Process {
     public:
         
         Resource(const string& name) : Process(name), touched(false) {}
-        
-        /* IMPORTANT:
-         * If a System uses this Resource,
-         * that System MUST call Resource::Touch!
-         * Otherwise the resource will be freed.
-         */
         
         bool IsTouched() { return touched; }
 };

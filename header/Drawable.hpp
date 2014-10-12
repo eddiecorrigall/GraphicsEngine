@@ -78,7 +78,7 @@ class Drawable : public Resource {
             position[X] = M[3][X];
             position[Y] = M[3][Y];
             position[Z] = M[3][Z];
-            position[W] = 1.0f; // position information
+            position[W] = 1.0f; // Include position information
             
             return position;
         }
@@ -91,7 +91,7 @@ class Drawable : public Resource {
             direction[X] = M[0][X];
             direction[Y] = M[0][Y];
             direction[Z] = M[0][Z];
-            direction[W] = 0.0f; // no position information
+            direction[W] = 0.0f; // Do not include position information
             
             return glm::normalize(direction);
         }

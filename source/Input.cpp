@@ -1,9 +1,11 @@
 #include "Input.hpp"
 #include "Video.hpp"
 
+#include <SDL2/SDL.h>
+
 #include <iostream>
 
-#include <SDL2/SDL.h>
+using namespace std;
 
 Input::Input(const string& name) : System(name) {
     
@@ -75,7 +77,7 @@ void Input::Update(const unsigned int& elapsed_milliseconds) {
         }
     }
     
-    // ##### View ##### ///
+    // ##### Camera ##### ///
     
     float elapsed_seconds = (float)elapsed_milliseconds / 1000.0f;
     float delta_frames = (float)VIDEO_FPS * elapsed_seconds;

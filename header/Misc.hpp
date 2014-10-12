@@ -19,11 +19,4 @@ inline T random(const T& min, const T& max) {
     return r;
 }
 
-#define X (0)
-#define Y (1)
-#define Z (2)
-#define W (3)
-
-#define MAX_PATH (256)
-
 #endif
