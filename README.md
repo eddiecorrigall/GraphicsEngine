@@ -1,8 +1,9 @@
 # GraphicsEngine
 A simple C++ OpenGL engine written from scratch.
-* Written without threading, uses main-loop to update processes.
+Written without threading, uses main-loop to update processes.
+Supports
+* MD2 models
 * Camera
-* Supports MD2 models.
 * Polygon subdivision
 * Linear interpolation
 
