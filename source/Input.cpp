@@ -62,6 +62,7 @@ void Input::Update(const unsigned int& elapsed_milliseconds) {
                     case SDLK_x: gfx->ToggleInterpolation(); break;
                     case SDLK_z: gfx->ToggleSubdivision(); break;
                     case SDLK_c: gfx->ToggleCelshading(); break;
+                    case SDLK_m: gfx->ToggleMotionBlur(); break;
                 }
             } break;
             

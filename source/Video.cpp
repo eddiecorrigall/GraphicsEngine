@@ -320,6 +320,7 @@ Video::Video(const string& name) : System(name) {
     enable_interpolation = true;
     enable_subdivision = true;
     enable_celshading = true;
+    enable_motion_blur = true;
     
     debug_lighting = false;
     debug_normals = false;
@@ -355,6 +356,13 @@ Video::Video(const string& name) : System(name) {
     // Setup double buffer...
     
     SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
+    
+    // Setup accumulation buffer...
+    // REQUIRED for motion blur...
+    SDL_GL_SetAttribute(SDL_GL_ACCUM_RED_SIZE,      5);
+    SDL_GL_SetAttribute(SDL_GL_ACCUM_GREEN_SIZE,    5);
+    SDL_GL_SetAttribute(SDL_GL_ACCUM_BLUE_SIZE,     5);
+    SDL_GL_SetAttribute(SDL_GL_ACCUM_ALPHA_SIZE,    5);
     
     // ...
     
@@ -544,7 +552,36 @@ void Video::Update(const unsigned int& elapsed_milliseconds) {
     
     // Update the window...
     
-    SDL_GL_SwapWindow((SDL_Window*)window);
+    #define ACCUM_MAX (4)
+    #define ACCUM_WEIGHT (1.0f / (float)ACCUM_MAX)
+    
+    static int accum_index = 0;
+    
+    if (IsMotionBlurEnabled()) {
+        
+        // On the first frame, the buffer is always loaded/cleared...
+        // On all other frames, the buffer is accumulated...
+        
+        glAccum((accum_index == 0) ? GL_LOAD : GL_ACCUM, ACCUM_WEIGHT);
+        
+        // Move to next frame...
+        
+        accum_index++;
+        
+        // If all frames have been processed, draw the buffer to the screen...
+        
+        if (accum_index == ACCUM_MAX) {
+            
+            accum_index = 0;
+            
+            glAccum(GL_RETURN, 1.0f);
+            
+            SDL_GL_SwapWindow((SDL_Window*)window);
+        }
+    }
+    else {
+        SDL_GL_SwapWindow((SDL_Window*)window);
+    }
 }
 
 void Video::Resize(const int& width, const int& height) {

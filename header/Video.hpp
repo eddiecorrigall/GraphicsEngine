@@ -65,6 +65,7 @@ class Video : public System {
         bool enable_interpolation;
         bool enable_subdivision;
         bool enable_celshading;
+        bool enable_motion_blur;
         
         bool debug_lighting;
         bool debug_normals;
@@ -84,10 +85,12 @@ class Video : public System {
         bool IsInterpolationEnabled() { return enable_interpolation; }
         bool IsSubdivisionEnabled() { return enable_subdivision; }
         bool IsCelshadingEnabled() { return enable_celshading; }
+        bool IsMotionBlurEnabled() { return enable_motion_blur; }
         
         void ToggleInterpolation() { enable_interpolation = !enable_interpolation; }
         void ToggleSubdivision() { enable_subdivision = !enable_subdivision; }
         void ToggleCelshading() { enable_celshading = !enable_celshading; }
+        void ToggleMotionBlur() { enable_motion_blur = !enable_motion_blur; }
         
         bool IsDebuggingLighting() { return debug_lighting; }
         bool IsDebuggingNormals() { return debug_normals; }
