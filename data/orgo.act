@@ -1,0 +1,8 @@
+data/orgo.md2
+data/orgo.bmp
+IDLE	1	0	40
+RUN		1	40	6
+ATTACK	0	46	8
+JUMP	0	66	6
+WAVE	1	112	11
+DEAD	0	178	6
