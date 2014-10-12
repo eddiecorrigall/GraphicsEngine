@@ -15,7 +15,7 @@ enum Key {
     KEY_MAX
 };
 
-class Input : public Process {
+class Input : public System {
     
     private:
         

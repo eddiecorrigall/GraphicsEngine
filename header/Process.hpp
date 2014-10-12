@@ -10,15 +10,16 @@
 using namespace std;
 
 class Process;
-class Resource;
 class ProcessManager;
 
-extern ProcessManager engine;
-extern bool operator< (const Process& p, const Process& q);
-extern bool operator== (const Process& p, const Process& q);
+class System;
+class Resource;
 
-typedef Process System;
-typedef map<const type_info*, System*> SystemMap; // type => System
+extern ProcessManager engine;
+extern bool operator< (const System& a, const System& b);
+extern bool operator== (const System& a, const System& b);
+
+typedef map<const type_info*, System*> SystemMap;
 typedef vector<Resource*> ResourceList;
 
 #include <iostream>
@@ -27,13 +28,12 @@ using namespace std;
 class Process {
     
     friend class ProcessManager;
-
-    private:
     
-        const string name;
-        bool running;
+    private:
         
-        Process() {}
+        const string name;
+        
+        //Process() {}
         
     protected:
         
@@ -41,50 +41,67 @@ class Process {
         
     public:
         
-        Process(const string& name) : name(name), running(true) {
-            cout << "Process " << Name() << " running " << IsRunning() << endl;
-        }
+        Process(const string& name) : name(name) {}
         
         string Name() { return name; }
+};
+
+class System : public Process {
+    
+    private:
+    
+        bool running;
+        
+        //System() {}
+        
+    public:
+        
+        System(const string& name) : Process(name), running(true) {}
         
         virtual void Start() { running = true; }
         virtual void Stop() { running = false; }
         
         virtual bool IsRunning() { return running; }
         
-        friend bool operator< (const Process& p, const Process& q);
-        friend bool operator== (const Process& p, const Process& q);
+        friend bool operator< (const System& a, const System& b);
+        friend bool operator== (const System& a, const System& b);
 };
 
 class Resource : public Process {
+    
+    friend class System;
     
     private:
         
         bool touched; // Touched/used by a system
         
-    public:
+        //Resource() {}
         
-        Resource(const string& name) : Process(name), touched(false) {
-            cout << "Resource " << Name() << " running " << IsRunning() << endl;
-        }
-        
-        /* IMPORTANT:
-         * If a system uses this resource,
-         * that system MUST call Resource::Touch
-         */
+    protected:
         
         void Touch() { touched = true; }
+        
+    public:
+        
+        Resource(const string& name) : Process(name), touched(false) {}
+        
+        /* IMPORTANT:
+         * If a System uses this Resource,
+         * that System MUST call Resource::Touch!
+         * Otherwise the resource will be freed.
+         */
+        
         bool IsTouched() { return touched; }
 };
 
-class ProcessManager : public Process {
+class ProcessManager : public System {
     
     private:
         
         SystemMap systems; // permanent
         ResourceList resources; // allocated / deallocated
         
-        ProcessManager() {}
+        //ProcessManager() {}
         
     protected:
         

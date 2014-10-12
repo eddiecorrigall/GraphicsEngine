@@ -11,7 +11,7 @@
 #define MAX_SOUND (100)
 #define MAX_MUSIC (100)
 
-class Audio : public Process {
+class Audio : public System {
     
     private:
         

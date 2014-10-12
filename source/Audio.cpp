@@ -4,7 +4,7 @@
 #include <iostream>
 #include <cassert>
 
-Audio::Audio(const std::string& name) : Process(name) {
+Audio::Audio(const std::string& name) : System(name) {
     
     sound_count = 0;
     music_count = 0;

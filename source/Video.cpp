@@ -321,7 +321,7 @@ void* toon_filter(
 
 TextureFilter TextureFilter_Toon = &toon_filter;
 
-Video::Video(const std::string& name) : Process(name) {
+Video::Video(const std::string& name) : System(name) {
     
     enable_interpolation = true;
     enable_subdivision = true;
@@ -509,12 +509,8 @@ void Video::Update(const unsigned int& elapsed_milliseconds) {
         Drawable* resource = (Drawable*)resources->at(i);
         
         if (resource == NULL) {
-            //cout << "Not drawable " << resources->at(i)->Name() << endl;
+            cout << "Not drawable " << resources->at(i)->Name() << endl;
             continue;
-        }
-        
-        if (resource->IsRunning()) {
-            //cout << "Video: Not running " << resources->at(i)->Name() << endl;
         }
         
         glPushMatrix();

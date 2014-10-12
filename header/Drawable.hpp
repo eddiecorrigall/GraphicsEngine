@@ -33,12 +33,10 @@ class Drawable : public Resource {
     
     public:
         
-        Drawable(const string& name) : Resource(name),
-                is_matrix_valid(false),
-                is_inverse_valid(false) {
-            
-            cout << "Drawable " << Name() << " running " << IsRunning() << endl;
-        }
+        Drawable(const string& name)
+            : Resource(name)
+            , is_matrix_valid(false)
+            , is_inverse_valid(false) {}
         
         void Rotate(const float& degrees, const float& axis_x, const float& axis_y, const float& axis_z) {
             is_matrix_valid = false;

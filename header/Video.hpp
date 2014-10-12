@@ -40,7 +40,7 @@ extern void Subdivide2D( // Warning: Recursive function
     vector<float>& buffer,
     const glm::vec2& a, const glm::vec2& b, const glm::vec2& c);
 
-class Video : public Process {
+class Video : public System {
     
     private:
         

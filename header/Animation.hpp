@@ -56,15 +56,14 @@ class Animation : public Drawable {
 
     public:
 
-        Animation(const string& name, AnimationModel* model) : Drawable(name),
-                model(model),
-                action(INVALID),
-                frame(0),
-                frame_interp(0.0f) {
+        Animation(const string& name, AnimationModel* model)
+            : Drawable(name)
+            , model(model)
+            , action(INVALID)
+            , frame(0)
+            , frame_interp(0.0f) {
             
-            cout << "Animation " << Name() << " running " << IsRunning() << endl;
-            
-            SetAction(IDLE); // Required action!
+            SetAction(IDLE); // Default action!
         }
 
         virtual ~Animation() {}

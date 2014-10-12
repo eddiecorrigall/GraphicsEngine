@@ -7,15 +7,15 @@
 
 ProcessManager engine("engine");
 
-bool operator< (const Process& p, const Process& q) {
-    return typeid(p).before(typeid(q));
+bool operator< (const System& a, const System& b) {
+    return (typeid(a).before(typeid(b)));
 }
 
-bool operator== (const Process& p, const Process& q) {
-    return (typeid(p) == typeid(q));
+bool operator== (const System& a, const System& b) {
+    return (typeid(a) == typeid(b));
 }
 
-ProcessManager::ProcessManager(const string& name) : Process(name) {
+ProcessManager::ProcessManager(const string& name) : System(name) {
 }
 
 ProcessManager::~ProcessManager() {
@@ -25,8 +25,6 @@ ProcessManager::~ProcessManager() {
     for (SystemMap::iterator itr = systems.begin(); itr != systems.end(); itr++) {
         
         System* system = itr->second;
-        
-        system->Stop();
         delete system;
     }
     
@@ -37,8 +35,6 @@ ProcessManager::~ProcessManager() {
     for (ResourceList::iterator itr = resources.begin(); itr != resources.end(); itr++) {
         
         Resource* resource = (*itr);
-        
-        resource->Stop();
         delete resource;
     }
     
@@ -46,20 +42,18 @@ ProcessManager::~ProcessManager() {
 }
 
 void ProcessManager::Update(const unsigned int& elapsed_milliseconds) {
-
+    
     // ##### Systems...
     
     /* Note:
-     * A system is a process which uses handles resources.
-     * At least one system must use a resource.
-     * When a system updates, the system MUST call Resource::Touch().
+     * A System is a Process which handles resources.
+     * At least one System must use a resource.
+     * When a System updates, the System MUST call Resource::Touch().
      */
-    
-    if (IsRunning() == false) return;
     
     for (SystemMap::iterator itr = systems.begin(); itr != systems.end(); itr++) {
         
-        if (IsRunning() == false) continue;
+        if (IsRunning() == false) break;
 
         System* system = itr->second;
 
@@ -71,33 +65,28 @@ void ProcessManager::Update(const unsigned int& elapsed_milliseconds) {
     // ##### Resources...
     
     /* Note:
-     * If a system failed to touch a resource,
-     * Or the resource is no longer running,
-     * Then deallocate the resource.
+     * If a system failed to touch a Resource,
+     * The Resource is deallocated.
      */
-    
-    if (IsRunning() == false) return;
     
     for (ResourceList::iterator itr = resources.begin(); itr != resources.end(); itr++) {
         
+        if (IsRunning() == false) break;
+        
         Resource* resource = (*itr);
         
-        /*if (resource->IsTouched() == false || resource->IsRunning() == false) {
-            delete resource;
-            resources.erase(itr);
-        }
+        if (resource->IsTouched()) continue;
         
-        if (resource->IsTouched() == false) {
-            cerr << "ERROR: Resource " << resource->Name() << " never touched!" << endl;
-        }*/
+        cerr << "ERROR: Resource " << resource->Name() << " never touched!" << endl;
+        
+        delete resource;
+        resources.erase(itr);
     }
 }
 
 void ProcessManager::Start() {
     
-    cout << "ProcessManager::ProcessManager" << endl;
-    
-    Process::Start();
+    System::Start();
 
     unsigned int last_milliseconds = SDL_GetTicks();
 
@@ -117,12 +106,6 @@ bool ProcessManager::ContainsSystem(const type_info* system_type) {
 
 bool ProcessManager::InsertSystem(const type_info* system_type, System* system) {
     
-    cout
-        << "ProcessManager::InsertProcess"
-        << ' '
-        << system->Name()
-        << endl;
-    
     if (ContainsSystem(system_type)) {
         cerr << "ERROR: already contains process!" << endl;
         return false;
@@ -133,7 +116,7 @@ bool ProcessManager::InsertSystem(const type_info* system_type, System* system) 
     return true;
 }
 
-Process* ProcessManager::FindSystem(const type_info* system_type) {
+System* ProcessManager::FindSystem(const type_info* system_type) {
     
     SystemMap::iterator results = systems.find(system_type);
     

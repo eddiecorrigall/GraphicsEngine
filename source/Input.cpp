@@ -5,7 +5,7 @@
 
 #include <SDL2/SDL.h>
 
-Input::Input(const string& name) : Process(name) {
+Input::Input(const string& name) : System(name) {
     
     if (SDL_Init(SDL_INIT_JOYSTICK) != 0) {
         cerr << "ERROR: Failed to initialize SDL INPUT!" << endl;
