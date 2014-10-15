@@ -17,6 +17,7 @@ Written without threading, uses main-loop to update processes.
 * z toggles polygon subdivision
 * x toggles linear interpolation
 * c toggles shading
+* m toggles motion blur
 
 ## Requirements
 GLM, SDL2, SDL2_mixer, SDL2_image, OpenGL2 (gl and glu).
