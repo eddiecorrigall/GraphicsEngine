@@ -477,6 +477,8 @@ void Video::Update(const unsigned int& elapsed_milliseconds) {
     
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     
+    // ##### DRAW 3D ##### //
+    
     // Load view-model matrix...
     
     glPushMatrix();
@@ -550,8 +552,51 @@ void Video::Update(const unsigned int& elapsed_milliseconds) {
     
     glPopMatrix();
     
-    // Update the window...
+    // ##### DRAW 2D ##### //
+    /*
+    glDisable(GL_LIGHTING);
     
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+    
+    glEnable(GL_TEXTURE_2D);
+    glEnable(GL_BLEND);
+    
+    glPushMatrix();
+    glLoadIdentity();
+
+    glMatrixMode(GL_MODELVIEW);
+    glLoadIdentity();
+    
+    glTranslatef(-0.5f, -0.5f, 0.0f);
+    
+    glBindTexture(GL_TEXTURE_2D, splash_screen_texture);
+
+    glBegin(GL_QUADS);
+
+        glColor4f(1.0f, 1.0f, 1.0f, splash_screen_alpha);
+
+        glTexCoord2f(0, 1);
+        glVertex3f(0, 0, -3);
+
+        glTexCoord2f(1, 1);
+        glVertex3f(1, 0, -3);
+
+        glTexCoord2f(1, 0);
+        glVertex3f(1, 1, -3);
+
+        glTexCoord2f(0, 0);
+        glVertex3f(0, 1, -3);
+
+    glEnd();
+
+    glBindTexture(GL_TEXTURE_2D, 0);
+    glDisable(GL_BLEND);
+
+    glPopMatrix();
+    */
+    
+    // ##### Update the window ##### //
+
     #define ACCUM_MAX (4)
     #define ACCUM_WEIGHT (1.0f / (float)ACCUM_MAX)
     
