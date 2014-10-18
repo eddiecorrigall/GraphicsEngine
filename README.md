@@ -24,9 +24,11 @@ Written without threading, uses main-loop to update processes.
 
 ## Installation
 
- 1. Ensure dependencies are installed (see Build Requirements)
- 2. make
- 3. ./engine
+1. Ensure dependencies are installed (see Build Requirements)
+2. Build
+	* make
+3. Run
+	* ./engine
 
 ## Build Requirements
 
