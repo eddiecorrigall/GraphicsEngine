@@ -4,12 +4,7 @@ A simple C++ OpenGL engine written from scratch. No threading but does use main-
 
 ## Features
 
-* Camera
-* MD2 models
-* Motion blur
-* Cel shading
-* Polygon subdivision
-* Linear interpolation
+Sound, Manual camera, MD2 models, Motion blur, Cel shading, Polygon subdivision, Linear interpolation
 
 ## Controls
 
