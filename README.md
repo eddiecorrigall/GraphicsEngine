@@ -1,7 +1,6 @@
 # GraphicsEngine
 
-A simple C++ OpenGL engine written from scratch.
-Written without threading, uses main-loop to update processes.
+A simple C++ OpenGL engine written from scratch. No threading but does use main-loop to update "processes" and "resources".
 
 ## Features
 
