@@ -24,7 +24,7 @@ A simple C++ OpenGL engine written from scratch. No threading but does use main-
 ## Installation
 
 1. Ensure dependencies are installed (see Build Requirements)
-2. Build
+2. Build binaries
 	* make
 3. Run
 	* ./engine
@@ -33,7 +33,7 @@ A simple C++ OpenGL engine written from scratch. No threading but does use main-
 
 GLM, SDL2, SDL2_image, SDL2_mixer, OpenGL2 (gl and glu).
 
-Note: You may need to add ogg support for SDL2_mixer
+Note: You may want to install ogg support for SDL2_mixer
 
 1. Update system and packages
 	* sudo apt-get update
