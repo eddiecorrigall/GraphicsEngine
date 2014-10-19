@@ -52,4 +52,4 @@ Note: You may want to install ogg support for SDL2_mixer
 
 ## Screenshots
 
-* [01](screenshot_01.png)
+* [screenshot 01](screenshot_01.png)
