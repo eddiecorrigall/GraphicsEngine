@@ -49,3 +49,7 @@ Note: You may want to install ogg support for SDL2_mixer
 7. Check:
   * dpkg -s SDL2
   * dpkg -L SDL2
+
+## Screenshots
+
+* [01](screenshot_01.png)
