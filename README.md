@@ -2,9 +2,13 @@
 
 A simple C++ OpenGL engine written from scratch. No threading but does use main-loop to update "processes" and "resources".
 
+## Screenshots
+
+* [screenshot 01](screenshot_01.png)
+
 ## Features
 
-Sound, Manual camera, MD2 models, Motion blur, Cel shading, Polygon subdivision, Linear interpolation
+Sound, camera, md2 models, linear-interpolated animation, motion blur, cel shading, polygon subdivision.
 
 ## Controls
 
@@ -49,7 +53,3 @@ Note: You may want to install ogg support for SDL2_mixer
 7. Check:
   * dpkg -s SDL2
   * dpkg -L SDL2
-
-## Screenshots
-
-* [screenshot 01](screenshot_01.png)
