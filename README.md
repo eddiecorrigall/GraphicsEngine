@@ -22,16 +22,11 @@ Sound, camera, md2 models, linear-interpolated animation, motion blur, cel shadi
 
 ## Installation
 
-2. Build binaries
-	* make
-3. Run
-	* ./engine
+You may need to install ogg support for SDL2_mixer
 
 ### Build Requirements
 
-GLM, SDL2, SDL2_image, SDL2_mixer, OpenGL2 (gl and glu).
-
-Note: You may want to install ogg support for SDL2_mixer
+OpenGL, GLM, SDL2, SDL2_image, SDL2_mixer, OpenGL2 (gl and glu).
 
 ```{r, engine='bash', count_lines}
 apt-get update
