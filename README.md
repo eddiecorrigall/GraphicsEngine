@@ -46,3 +46,19 @@ make
 ```{r, engine='bash', count_lines}
 ./engine
 ```
+## ACT files
+This is a unique format designed by yours truely. It is a configuration file containing meta data on the model, texture and animations for a 3D resource.
+
+| Line Number | Example | Format | Description |
+| --- | --- | --- | --- |
+| 0 | "data/orgo.md2" | [file path] | (Required) resource path of model |
+| 1 | "data/orgo.bmp" | [file path] | (Required) resource path of texture |
+| 2 to N | "IDLE 1 0 40" | [action] [loop] [frame offset] [number of frames] | (Required) IDLE action definition, whitespace separated parameters |
+
+| Parameter | Description |
+| --- | --- |
+| [file path] | Relative path to the executing program (engine binary) |
+| [action] | "IDLE", "RUN", "JUMP", "ATTACK", "WAVE", "DEAD" |
+| [loop] | If set to "0" then animation is not looped, otherwise animation will loop |
+| [frame offset] | non-negative integer |
+| [number of frames] | positive integer |
