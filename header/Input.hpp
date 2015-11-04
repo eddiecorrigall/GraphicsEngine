@@ -8,29 +8,29 @@
 using namespace std;
 
 enum Key {
-    KEY_UP = 0,
-    KEY_DOWN,
-    KEY_LEFT,
-    KEY_RIGHT,
-    KEY_MAX
+	KEY_UP = 0,
+	KEY_DOWN,
+	KEY_LEFT,
+	KEY_RIGHT,
+	KEY_MAX
 };
 
 class Input : public System {
-    
-    private:
-        
-        bool key_down[KEY_MAX];
-    
-    protected:
-        
-        void Update(const unsigned int& elapsed_milliseconds);
-        
-    public:
-        
-        Input(const string& name);
-        ~Input();
-        
-        bool IsKeyDown(Key key) { return key_down[key]; }
+	
+	private:
+		
+		bool key_down[KEY_MAX];
+	
+	protected:
+		
+		void Update(const unsigned int& elapsed_milliseconds);
+		
+	public:
+		
+		Input(const string& name);
+		~Input();
+		
+		bool IsKeyDown(Key key) { return key_down[key]; }
 };
 
 #endif

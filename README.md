@@ -4,7 +4,8 @@ A simple C++ OpenGL engine written from scratch. No threading but does use main-
 
 ## Screenshots
 
-* [screenshot 01](screenshot_01.png)
+* [screenshot 01 - View of orge and dead knight](screenshot_01.png)
+* [screenshot 02 - Vector debugging](screenshot_02.png)
 
 ## Features
 
@@ -19,6 +20,9 @@ Sound, camera, md2 models, linear-interpolated animation, motion blur, cel shadi
 * x toggles linear interpolation
 * c toggles shading
 * m toggles motion blur
+* l toggles light vector debugging
+* n toggles normal vector debugging
+* v toggles view vector debugging (perpendicular to view so that it is visible)
 
 ## Installation
 
