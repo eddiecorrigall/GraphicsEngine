@@ -10,11 +10,16 @@ int main(int argc, char** argv) {
 	
 	srand(time(NULL));
 	
-	// ...
+	// Instantiate core components
 	
-	SystemInstance<Video>(); // ie. core.InsertProcess(&typeid(Video), new Video("video"));
-	SystemInstance<Audio>();
+	Video* gfx = SystemInstance<Video>(); // ie. core.InsertProcess(&typeid(Video), new Video("video"));
+	Audio* sfx = SystemInstance<Audio>();
 	SystemInstance<Input>();
+
+	// ...
+
+	int background_music = sfx->LoadMusic("data/monster_mash.ogg");
+	sfx->PlayMusic(background_music, true);
 	
 	// ...
 	
