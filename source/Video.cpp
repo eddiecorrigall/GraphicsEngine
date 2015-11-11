@@ -605,30 +605,29 @@ void Video::Update(const unsigned int& elapsed_milliseconds) {
 	#define ACCUM_WEIGHT (1.0f / (float)ACCUM_MAX)
 	
 	static int accum_index = 0;
-	
+
 	if (IsMotionBlurEnabled()) {
-		
+
 		// On the first frame, the buffer is always loaded/cleared...
 		// On all other frames, the buffer is accumulated...
-		
+
 		glAccum((accum_index == 0) ? GL_LOAD : GL_ACCUM, ACCUM_WEIGHT);
-		
-		// Move to next frame...
-		
-		accum_index++;
-		
+
 		// If all frames have been processed, draw the buffer to the screen...
-		
+
 		if (accum_index == ACCUM_MAX) {
-			
-			accum_index = 0;
-			
 			glAccum(GL_RETURN, 1.0f);
-			
 			SDL_GL_SwapWindow((SDL_Window*)window);
+			glClear(GL_ACCUM_BUFFER_BIT);
+			accum_index = 0;
 		}
+
+		// Move to next frame...
+
+		accum_index++;
 	}
 	else {
+		accum_index = 0; // Always start motion blur at accum index zero
 		SDL_GL_SwapWindow((SDL_Window*)window);
 	}
 }
